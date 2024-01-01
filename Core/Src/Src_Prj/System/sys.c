@@ -22,7 +22,7 @@ uint32_t sysTimersArray[SYSTIMERS_TOTAL] = {0};
 uint8_t sys_consoleSpace = RESET;
 #endif /* INIT_SYS_REQUEST_DEBUG */
 /************************************************************************************/
-/*                                Private functions                                 */
+/*                                Private Functions                                 */
 /************************************************************************************/
 #if INIT_SYS_REQUEST_CONSOLE_DEBUG
 /* This function will add a debug space to the console window. */

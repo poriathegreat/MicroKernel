@@ -15,7 +15,7 @@ uint8_t hardcodedSerial[] = SYS_HARDCODED_SERIAL;
 #endif
 /************************************************************************************/
 #if INIT_LOAD_SERIAL_FROM_MEMORY
-void sys_loadSerialNumberFromMemory(uint8_t* loadedSerialNumber){
+void s_loadSerialNumberFromExternalMemory(char* loadedSerialNumber){
 	/* write code here to load serial number from memory. */
 
 
@@ -24,9 +24,9 @@ void sys_loadSerialNumberFromMemory(uint8_t* loadedSerialNumber){
 #endif /* INIT_LOAD_FROM_MEMORY */
 /************************************************************************************/
 /* This function will read the deviceSerialNumber and write it to sysData.sys.serialNumber. */
-void sys_loadSerialNumber(void){
+void s_loadSerialNumber(void){
 #if INIT_LOAD_SERIAL_FROM_MEMORY
-	sys_loadSerialNumberFromMemory(sysData.sys.serialNumber);
+	s_loadSerialNumberFromExternalMemory(sysData.sys.serialNumber);
 #else
 	memcpy(sysData.sys.serialNumber, hardcodedSerial, sizeof(hardcodedSerial));
 #endif

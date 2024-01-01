@@ -27,13 +27,13 @@ void sys_firstInit(void){
 	/* Read the status from the external memory */
 	sys_EXTROMRead();
 #else
-	/* Read the status to the internal memory */
+	/* Read the status from the internal memory */
 	sys_ROMRead();
 #endif /* INIT_SAVE_EXTERNAL_MEMORY */
 #endif /* INIT_SAVE_TO_MEMORY */
 
 	/* Load the serial Number */
-	sys_loadSerialNumber();
+	s_loadSerialNumber();
 
 	/* The project name and info shown on the console window. */
 	sys_consoleSysInfo();
@@ -42,8 +42,9 @@ void sys_firstInit(void){
 	s_battery_init();
 #endif /* INIT_SYS_HAS_BATTERY */
 
+#if INIT_SYS_LOCK_UUID
 	s_readUuid();
-
+#endif /* INIT_SYS_LOCK_UUID */
 
 #if	INIT_SYS_REQUEST_CONSOLE_DEBUG
 	/* Request debug space on the console */

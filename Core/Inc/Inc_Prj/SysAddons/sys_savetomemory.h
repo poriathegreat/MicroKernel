@@ -7,17 +7,16 @@
 
 #ifndef INC_INC_PRJ_SYSADDONS_SYS_SAVETOMEMORY_H_
 #define INC_INC_PRJ_SYSADDONS_SYS_SAVETOMEMORY_H_
-#if INIT_SAVE_TO_MEMORY
-
-
 /************************************************************************************/
 /*                               Included Libraries                                 */
 /************************************************************************************/
 /* Include the system */
 #include "sys.h"
 
+#if INIT_SAVE_TO_MEMORY
+
 /* Set this to 1 for external memory or to zero for internal memory. */
-#define INIT_SAVE_EXTERNAL_MEMORY				1
+#define INIT_SAVE_EXTERNAL_MEMORY				0
 
 
 
@@ -29,7 +28,10 @@
 
 /************************************************************************************/
 
-
+typedef struct{
+	_Bool saveNow;
+}s_ROMdataStruct;
+extern s_ROMdataStruct s_ROMdata;
 
 
 #if INIT_SAVE_EXTERNAL_MEMORY

@@ -154,8 +154,9 @@ void buffer_firstInit(void){
 #if BUFFER_USE_ENCRYPTION
 	/* If KEY and IV are to be changed,
 	 * they have to be set here. */
-
+#if INIT_SYS_LOCK_UUID
 	 memcpy(iv, sysData.sys.uuid, 12);
+#endif /* INIT_SYS_LOCK_UUID */
 #endif /* BUFFER_USE_ENCRYPTION */
 
 

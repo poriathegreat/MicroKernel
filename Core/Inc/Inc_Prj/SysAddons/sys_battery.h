@@ -63,14 +63,5 @@ void s_checkbattery_main(void);
 
 
 
-
-
-
-
-
-
-
-
-
 #endif /* INIT_SYS_HAS_BATTERY */
 #endif /* INC_INC_PRJ_SYSADDONS_SYS_BATTERY_H_ */

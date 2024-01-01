@@ -15,6 +15,7 @@ RM := rm -rf
 -include Core/Src/Src_Prj/System/UniqueID/subdir.mk
 -include Core/Src/Src_Prj/System/Memory/InternalMemory/subdir.mk
 -include Core/Src/Src_Prj/System/Memory/ExternalMemory/subdir.mk
+-include Core/Src/Src_Prj/System/Memory/subdir.mk
 -include Core/Src/Src_Prj/System/Internal/subdir.mk
 -include Core/Src/Src_Prj/System/Encryption/subdir.mk
 -include Core/Src/Src_Prj/System/Debug/subdir.mk

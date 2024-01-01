@@ -38,7 +38,7 @@
 /************************************************************************************/
 /*                                   System Debug                                   */
 /************************************************************************************/
-#define INIT_SYS_REQUEST_CONSOLE_DEBUG			(0)
+#define INIT_SYS_REQUEST_CONSOLE_DEBUG			(1)
 #if INIT_SYS_REQUEST_CONSOLE_DEBUG
 #define CONSOLE_DEBUG_LINES_NEEDED				(15)
 extern uint8_t sys_consoleSpace;
@@ -65,7 +65,7 @@ extern uint8_t sys_consoleSpace;
 /* If INIT_SAVE_TO_MEMORY is enabled, the sys_savetomemory .c/.h files need to be edited.
  * In these files, we save the status of the system before shutting off or going to sleep.
  * This status is checked when the system wakes up. */
-#define INIT_SAVE_TO_MEMORY						(0)
+#define INIT_SAVE_TO_MEMORY						(1)
 /************************************************************************************/
 /* If INIT_SYS_HAS_BATTERY is enabled, the sys_battery .c/.h files need to be edited.
  * needs to be edited. */
@@ -85,7 +85,7 @@ extern uint8_t sys_consoleSpace;
  * boot, but will show the current UUID. */
 #define INIT_SYS_LOCK_UUID						(1)
 #if INIT_SYS_LOCK_UUID
-//#define UUID_LOCKED_TO	{0x52,0xFF,0x6D,0x06,0x48,0x65,0x84,0x49,0x12,0x22,0x19,0x67}
+#define UUID_LOCKED_TO			{0x52,0xFF,0x6D,0x06,0x48,0x65,0x84,0x49,0x12,0x22,0x19,0x67}
 #endif /* INIT_SYS_LOCK_UUID */
 /************************************************************************************/
 

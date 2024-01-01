@@ -84,6 +84,8 @@ void sys_timerReset(uint8_t timer);
 /* This function will read the unique id of the device. */
 void s_readUuid(void);
 
+/* This function will add a debug space to the console window. */
+void sys_consoleRequest(void);
 
 
 #endif /* INC_INC_PRJ_SYSTEM_SYSTEM_INTERNAL_H_ */

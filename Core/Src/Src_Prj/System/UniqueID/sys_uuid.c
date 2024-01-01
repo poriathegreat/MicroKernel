@@ -11,6 +11,8 @@
 #include <stdint.h>
 #include <string.h>
 
+#if INIT_SYS_LOCK_UUID
+
 #ifndef UUID_LOCKED_TO
 extern IWDG_HandleTypeDef hiwdg;
 #endif /* UUID_LOCKED_TO */
@@ -40,3 +42,4 @@ void s_readUuid(void){
 #endif
 }
 
+#endif /* INIT_SYS_LOCK_UUID */

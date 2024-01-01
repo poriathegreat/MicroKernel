@@ -10,7 +10,7 @@
 /*                                 Exported Macros                                  */
 /************************************************************************************/
 /* Define the UART handle connected to debug console here. */
-#define DEBUG_UART_HANDLE	huart2
+#define DEBUG_UART_HANDLE	huart1
 /************************************************************************************/
 /* Un-comment each part to enable or disable debug of the given part of the         */
 /* system. WARNING: Un-commenting will effect overall size of the code!             */

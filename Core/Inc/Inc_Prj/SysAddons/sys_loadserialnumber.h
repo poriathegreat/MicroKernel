@@ -16,7 +16,7 @@
 
 
 /* This function will read the deviceSerialNumber and write it to sysData.sys.serialNumber. */
-void sys_loadSerialNumber(void);
+void s_loadSerialNumber(void);
 
 
 

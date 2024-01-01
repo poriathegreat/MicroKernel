@@ -39,6 +39,12 @@ typedef struct{
 #if INIT_SYS_LOCK_UUID
 	uint8_t 			uuid[12];
 #endif /* INIT_SYS_LOCK_UUID */
+
+#if INIT_SYS_LOCK_UUID
+	_Bool 			keepOn;
+#endif /* INIT_SYS_LOCK_UUID */
+
+
 }sysInfoStructure_t;
 /************************************************************************************/
 /*                                Exported functions                                */
