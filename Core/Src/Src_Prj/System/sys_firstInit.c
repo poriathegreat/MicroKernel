@@ -13,7 +13,7 @@
 void sys_firstInit(void){
 #if INIT_CONFIGURE_PIN_STATE
 	/* Configure the system IO */
-	sys_configureI_O();
+	s_configureio_init();
 #endif /* INIT_CONFIGURE_PIN_STATE */
 
 #if INIT_STANDBY_FUNCTIONALITY
@@ -39,9 +39,10 @@ void sys_firstInit(void){
 	sys_consoleSysInfo();
 
 #if INIT_SYS_HAS_BATTERY
-	sys_checkBatteryInit();
-	sys_batteryFirstInit
+	s_battery_init();
 #endif /* INIT_SYS_HAS_BATTERY */
+
+	s_readUuid();
 
 
 #if	INIT_SYS_REQUEST_CONSOLE_DEBUG
@@ -49,7 +50,6 @@ void sys_firstInit(void){
 	sys_consoleRequest();
 #endif /* INIT_SYS_REQUEST_CONSOLE_DEBUG */
 
-	sys_readUuid();
 
 
 	interface_firstInit();

@@ -57,6 +57,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define BATTERY_ADC_Pin GPIO_PIN_1
+#define BATTERY_ADC_GPIO_Port GPIOA
 #define FLASH_CS_Pin GPIO_PIN_4
 #define FLASH_CS_GPIO_Port GPIOA
 #define FLASH_SCK_Pin GPIO_PIN_5

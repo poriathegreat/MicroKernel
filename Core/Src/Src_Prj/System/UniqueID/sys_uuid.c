@@ -23,7 +23,7 @@ int32_t read_mcu_unique_id( uint8_t * uuid ){
 }
 
 
-void sys_readUuid(void){
+void s_readUuid(void){
 	read_mcu_unique_id(sysData.sys.uuid);
 #ifndef UUID_LOCKED_TO
 	uint8_t sys_uuidSpace = console_requestSpace(2, "MCU Unique ID");

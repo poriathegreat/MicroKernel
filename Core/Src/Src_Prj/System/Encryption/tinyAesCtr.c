@@ -7,7 +7,7 @@ Block size can be chosen in aes.h - available choices are AES128, AES192, AES256
 /* Includes and Defines:                                                                  */
 /*****************************************************************************/
 #include "tinyAesCtr.h"
-
+#include <string.h>
 
 struct AES_ctx
 {

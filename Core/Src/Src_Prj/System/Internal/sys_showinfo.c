@@ -21,7 +21,7 @@ void sys_consoleSysInfo(void){
 
 	/* View the project info when the debug window starts up */
 	char BuildVersion[] = SYS_PROJECT_NAME " - Built (" __DATE__ "::" __TIME__ ")";
-	sys_infoSpace = console_requestSpace(5, BuildVersion);
+	sys_infoSpace = console_requestSpace(3, BuildVersion);
 	console_printf(sys_infoSpace, CONSOLE_PART_ONE, "Serial Number");
 	console_printf(sys_infoSpace, CONSOLE_PART_TWO, "[%s]", sysData.sys.serialNumber);
 	console_printf(sys_infoSpace+1, CONSOLE_PART_ONE, "Software Version");

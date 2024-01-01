@@ -82,7 +82,7 @@ uint32_t sys_timerCheck(uint8_t timer);
 void sys_timerReset(uint8_t timer);
 
 /* This function will read the unique id of the device. */
-void sys_readUuid(void);
+void s_readUuid(void);
 
 
 

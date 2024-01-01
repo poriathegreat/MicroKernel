@@ -49,17 +49,19 @@ void sys(void){
 #endif /* INIT_STANDBY_FUNCTIONALITY */
 
 #if INIT_SYS_HAS_BATTERY
-	sys_checkBattery();
+	s_checkbattery_main();
 #endif /* INIT_SYS_HAS_BATTERY */
 
 #if INIT_SYS_STAT_LED
 	/* blink led to show device status */
-	sys_statusLED();
+	s_statusLed_main();
 #endif /* INIT_SYS_STAT_LED */
 
-	sys_fetchData();
-
+	/* Shows the system up time on the top status bar */
 	sys_upTime();
+
+	/* Runs the fetch data function that will make a copy of the needed data produced by different sectors of the system. */
+	interface_fetchData();
 }
 
 /* Add this function to a 1ms timer call back to enable timed multitasking */

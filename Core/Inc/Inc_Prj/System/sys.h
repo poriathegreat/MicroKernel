@@ -32,9 +32,13 @@
 typedef struct{
 	char				serialNumber[16];    /* The serial number of the device. Should be 16 digits max. */
 	char				version[10];
+#if INIT_SYS_HAS_BATTERY
 	uint8_t				batteryPercent;
 	uint16_t			batteryVoltage;
+#endif /* INIT_SYS_HAS_BATTERY */
+#if INIT_SYS_LOCK_UUID
 	uint8_t 			uuid[12];
+#endif /* INIT_SYS_LOCK_UUID */
 }sysInfoStructure_t;
 /************************************************************************************/
 /*                                Exported functions                                */

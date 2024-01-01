@@ -13,6 +13,11 @@
 /************************************************************************************/
 /* Include the system */
 #include "sys.h"
+#if INIT_CONFIGURE_PIN_STATE
+
+
+/* This function will configure I/Os to the desired levels upon initialization. */
+void s_configureio_init(void);
 
 
 
@@ -24,6 +29,5 @@
 
 
 
-
-
+#endif /* INIT_CONFIGURE_PIN_STATE */
 #endif /* INC_INC_PRJ_SYSADDONS_SYS_CONFIGURE_IO_H_ */

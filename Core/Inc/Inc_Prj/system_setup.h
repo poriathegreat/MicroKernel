@@ -8,13 +8,12 @@
 #define INC_INC_PRJ_SYSTEMSETUP_H_
 /* To add a library to the project:
  *
- * 1. add the library_addTimer() function to the sys_systemClock() function.
- * 2. add the libraryDataStructure to the sysDataStructure_t
- * 3. add the interrupt handlers as stated in the library.
- * 4. add the library() function to the SUPER LOOP.
- * 5. add the library_firstInit function before the SUPER LOOP.
- *
- * 6. add the copy function for the data structures
+ * 1. add the library_addTimer() function to the ../Core/Src/Interface/interface_systemClock() function.
+ * 2. add the library_dataStructure to the interfaceDataStructure_t of ../Core/Src/Interface/int_fetchData
+ * 3. add the fetchData function to add a copy of the data structure to the interfaceDataStructure_t of ../Core/Src/Interface/int_fetchData
+ * 4. add the main function to the ../Core/Src/Interface/int_task.
+ * 5. add the initialization function to the ../Core/Src/Interface/int_firstInit.
+ * 6. add the interrupt handlers as stated in the library.
  */
 /*######################################################################################*/
 /*       THIS PART OF THE CODE MUST BE EDITED TO SUIT THE NEEDS OF THE PROJECT          */
@@ -49,7 +48,7 @@ extern uint8_t sys_consoleSpace;
 /************************************************************************************/
 /* If INIT_SYS_STAT_LED is enabled, the sys_statusled .c/.h files need to be edited
  * to reflect the correct status on LED */
-#define INIT_SYS_STAT_LED						(0)
+#define INIT_SYS_STAT_LED						(1)
 /************************************************************************************/
 /* If STANDBY_FUNCTIONALITY is enabled, the sys_standby .h/.c files needs to be edited
  * in that file, we need to define what will keep the system from entering standby. */
@@ -61,7 +60,7 @@ extern uint8_t sys_consoleSpace;
  * project (and likewise in other MCU).
  * However, I do not know how pin states move across sleep states of a MCU, and this
  * is to be sure and make things more accessible. */
-#define INIT_CONFIGURE_PIN_STATE				(0)
+#define INIT_CONFIGURE_PIN_STATE				(1)
 /************************************************************************************/
 /* If INIT_SAVE_TO_MEMORY is enabled, the sys_savetomemory .c/.h files need to be edited.
  * In these files, we save the status of the system before shutting off or going to sleep.
@@ -70,7 +69,7 @@ extern uint8_t sys_consoleSpace;
 /************************************************************************************/
 /* If INIT_SYS_HAS_BATTERY is enabled, the sys_battery .c/.h files need to be edited.
  * needs to be edited. */
-#define INIT_SYS_HAS_BATTERY					(0)
+#define INIT_SYS_HAS_BATTERY					(1)
 /************************************************************************************/
 /* If INIT_SYS_USE_ENCYPTION is enabled, the interface_passDataToNextLayer will received
  * encrypted data. For more detail look into the buffer.h file. */

@@ -18,6 +18,11 @@ void sys_systemClock(void){
 	buffer_addTimer();
 	tasks_addTimer();
 	interface_clock();
+
+#if INIT_SYS_STAT_LED
+	s_statLed_tick();
+#endif /* INIT_SYS_STAT_LED */
+
 }
 /* This is the timer callback. Feel free to use a different timer.
  * This functions is platform specific. Adjust to your needs. */
