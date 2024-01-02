@@ -23,6 +23,10 @@ void sys_systemClock(void){
 	s_statLed_tick();
 #endif /* INIT_SYS_STAT_LED */
 
+#if INIT_SAVE_TO_MEMORY
+	s_ROM_tick();
+#endif /* INIT_SAVE_TO_MEMORY */
+
 }
 /* This is the timer callback. Feel free to use a different timer.
  * This functions is platform specific. Adjust to your needs. */

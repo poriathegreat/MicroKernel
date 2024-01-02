@@ -23,13 +23,8 @@ void sys_firstInit(void){
 
 
 #if INIT_SAVE_TO_MEMORY
-#if INIT_SAVE_EXTERNAL_MEMORY
-	/* Read the status from the external memory */
-	sys_EXTROMRead();
-#else
-	/* Read the status from the internal memory */
-	sys_ROMRead();
-#endif /* INIT_SAVE_EXTERNAL_MEMORY */
+	/* Read the status from the memory */
+	s_ROM_init();
 #endif /* INIT_SAVE_TO_MEMORY */
 
 	/* Load the serial Number */

@@ -37,6 +37,11 @@ void sys(void){
 	/* Refresh the system so that it does not reset. */
 	HAL_IWDG_Refresh(&hiwdg);
 
+#if INIT_SAVE_TO_MEMORY
+	/* Periodically save the status to the memory */
+	s_ROM_main();
+#endif /* INIT_SAVE_TO_MEMORY */
+
 #if INIT_STANDBY_FUNCTIONALITY
 	/* Check if to put the system to sleep or not. */
 	if(sys_checkSleep() == SLEEP) {
