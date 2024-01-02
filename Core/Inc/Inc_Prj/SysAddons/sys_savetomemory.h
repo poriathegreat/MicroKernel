@@ -51,7 +51,7 @@ void s_ROM_main(void);
  * This function is automatically added. Nothing more to do here.*/
 void s_ROM_tick(void);
 
-
+void s_ROM_saveNow(void);
 
 /************************************************************************************/
 #endif /* INIT_SAVE_TO_MEMORY */

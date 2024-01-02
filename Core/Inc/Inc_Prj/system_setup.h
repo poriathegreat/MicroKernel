@@ -38,21 +38,25 @@
 /************************************************************************************/
 /*                                   System Debug                                   */
 /************************************************************************************/
-#define INIT_SYS_REQUEST_CONSOLE_DEBUG			(1)
+#define INIT_SYS_REQUEST_CONSOLE_DEBUG			(0)
 #if INIT_SYS_REQUEST_CONSOLE_DEBUG
 #define CONSOLE_DEBUG_LINES_NEEDED				(15)
 extern uint8_t sys_consoleSpace;
 #endif /* INIT_SYS_REQUEST_DEBUG */
-/************************************************************************************/
-/*                                  System Addons                                   */
-/************************************************************************************/
+
+
+/*######################################################################################*/
+/*                                   SYSTEM ADDONS                                      */
+/*######################################################################################*/
+
+
 /* If INIT_SYS_STAT_LED is enabled, the sys_statusled .c/.h files need to be edited
  * to reflect the correct status on LED */
 #define INIT_SYS_STAT_LED						(1)
 /************************************************************************************/
 /* If STANDBY_FUNCTIONALITY is enabled, the sys_standby .h/.c files needs to be edited
  * in that file, we need to define what will keep the system from entering standby. */
-#define INIT_STANDBY_FUNCTIONALITY 				(0)
+#define INIT_STANDBY_FUNCTIONALITY 				(1)
 /************************************************************************************/
 /* If INIT_CONFIGURE_PIN_STATE is enabled, the sys_configure_io .c/.h files needs to be edited
  * in those files, we need to re-define the initial PIN states.
@@ -77,7 +81,7 @@ extern uint8_t sys_consoleSpace;
 /************************************************************************************/
 /* If BUFFER_USE_EXTERNAL_FLASH is enabled, the data will be buffered in the external
  * flash memory. For more detail, look into the flashMemoryController.h */
-#define INIT_SYS_BUFFER_TO_EXTERNAL_FLASH		(1)
+#define INIT_SYS_BUFFER							(1)
 /************************************************************************************/
 /* If INIT_SYS_LOCK_UUID is enabled, the mcu will not boot unless that given UUID is
  * loaded from MCU hardware. In other words, the code is locked to a single MCU.

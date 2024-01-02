@@ -8,7 +8,7 @@
 /*                               Included Libraries                                 */
 /************************************************************************************/
 /* Include the system functions */
-#include "sys.h"
+#include "sys_buffer.h"
 
 #if BUFFER_USE_ENCRYPTION
 #include "tinyAesCtr.h"
@@ -88,7 +88,7 @@ HAL_StatusTypeDef buffer_encryptBeforePassing(uint8_t *data, size_t dataSize){
 	    }
 	}
 #else
-    if(system_passDataToNextLayer(data,dataSize) == HAL_OK){
+    if(interface_passDataToNextLayer(data,dataSize) == HAL_OK){
     	ret = HAL_OK;
     }else {
     	ret = HAL_ERROR;
@@ -149,7 +149,7 @@ HAL_StatusTypeDef buffer_addToBuffer(uint8_t *data, size_t dataSize){
 }
 /************************************************************************************/
 /* This function is run once before entering the super loop. */
-void buffer_firstInit(void){
+void s_buffer_init(void){
 
 #if BUFFER_USE_ENCRYPTION
 	/* If KEY and IV are to be changed,
@@ -199,9 +199,8 @@ uint8_t buffer_cellWithData(void){
 /* This function is to be placed inside the super loop.
  * It will check for a cell with data, if a cell with data is found,
  * it will [encrypt then] send the given package. */
-void buffer(void){
+void s_buffer_main(void){
 #if BUFFER_DATA_ENABLED
-
 	if(
 	    	(bufferTimersArray[TIMERS_BUFFER_CHECKCELLS] > CHECK_BUFFER_INTERVAL_MS)
 	){
@@ -223,7 +222,7 @@ void buffer(void){
 }
 /************************************************************************************/
 /* Add this function to a 1ms timer call back to enable timed multitasking */
-void buffer_addTimer(void){
+void s_buffer_tick(void){
 	for(uint8_t timer = RESET ; timer < BUFFERTIMERS_TOTAL ; timer++){
 		bufferTimersArray[timer]++;
 	}

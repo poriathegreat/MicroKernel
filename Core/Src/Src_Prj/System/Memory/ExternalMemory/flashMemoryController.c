@@ -53,7 +53,7 @@
 /********************************************************************************/
 #include "flashMemoryController.h"
 
-#if DEBUG_FCTR
+#if DEBUGFCTR
 #include "debug.h"
 #endif
 

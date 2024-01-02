@@ -991,17 +991,17 @@ void W25qxx_ReadBlock(uint8_t *pBuffer, uint32_t Block_Address, uint32_t OffsetI
 
 
 
-
-
-void flash_selfTest(void){
-
-		debugprintf("\r\n~TESTING FLASH~\r\n");
-		int a;
-		debugprintf("READING FLASH ID...\r\n");
-		a=0;
-		a = W25qxx_ReadID();
-		debugprintf("Flash ID: %d\n\r",a);
-}
+//
+//
+//void flash_selfTest(void){
+//
+//		debugprintf("\r\n~TESTING FLASH~\r\n");
+//		int a;
+//		debugprintf("READING FLASH ID...\r\n");
+//		a=0;
+//		a = W25qxx_ReadID();
+//		debugprintf("Flash ID: %d\n\r",a);
+//}
 
 
 

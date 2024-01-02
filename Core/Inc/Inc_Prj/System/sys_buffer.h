@@ -17,11 +17,11 @@
 /*                                 Exported Macros                                  */
 /************************************************************************************/
 /* number of buffer cells in ram. Each buffer cell is 256 bytes of data. */
+#define BUFFER_DATA_ENABLED					INIT_SYS_BUFFER
 #define CHECK_BUFFER_INTERVAL_MS			500		/* Milliseconds */
 #define CHECK_BUFFER_WAIT_TIME				240000 	/* Milliseconds*/
-#define BUFFER_DATA_ENABLED					1
 #define BUFFER_CELLS_IN_RAM_IF_NO_FLASH		15
-#define BUFFER_USE_EXTERNAL_FLASH			INIT_SYS_BUFFER_TO_EXTERNAL_FLASH // controlled by the system_setup.h file
+#define BUFFER_USE_EXTERNAL_FLASH			1
 #define BUFFER_USE_ENCRYPTION				INIT_SYS_USE_ENCYPTION	// controlled by the system_setup.h file
 /************************************************************************************/
 /*                               Exported Variables                                 */
@@ -43,13 +43,13 @@ HAL_StatusTypeDef buffer_addToBuffer(uint8_t *data, size_t dataSize);
 
 /* Add this function to the system 1ms timer.
  * if using the sys.h/sys.c file, add this function to sys_systemClock(). */
-void buffer_addTimer(void);
+void s_buffer_tick(void);
 
 /* Add this function to the Super Loop.  */
-void buffer(void);
+void s_buffer_main(void);
 
 /* Place this function before the Super Loop. */
-void buffer_firstInit(void);
+void s_buffer_init(void);
 
 
 

@@ -21,7 +21,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 /* Include the main system headers. */
-#include "buffer.h"
+#include "sys_buffer.h"
 #include "tasks.h"
 #include "debug.h"
 #include "interface.h"
@@ -40,9 +40,7 @@ typedef struct{
 	uint8_t 			uuid[12];
 #endif /* INIT_SYS_LOCK_UUID */
 
-#if INIT_SYS_LOCK_UUID
 	_Bool 			keepOn;
-#endif /* INIT_SYS_LOCK_UUID */
 
 
 }sysInfoStructure_t;

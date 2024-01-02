@@ -18,7 +18,7 @@ void sys_firstInit(void){
 
 #if INIT_STANDBY_FUNCTIONALITY
 	/* Keep the system on, or go back to sleep */
-	if(sys_checkWakeup() == SLEEP) {sys_enterStandby();}
+	if(s_checkWakeup() == SLEEP) {s_enterStandbyNow();}
 #endif /* INIT_STANDBY_FUNCTIONALITY */
 
 
@@ -46,7 +46,10 @@ void sys_firstInit(void){
 	sys_consoleRequest();
 #endif /* INIT_SYS_REQUEST_CONSOLE_DEBUG */
 
-
+#if INIT_SYS_BUFFER
+	/* Handles the data buffer */
+	s_buffer_init();
+#endif /* INIT_SYS_BUFFER */
 
 	interface_firstInit();
 

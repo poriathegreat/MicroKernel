@@ -37,6 +37,11 @@ void sys(void){
 	/* Refresh the system so that it does not reset. */
 	HAL_IWDG_Refresh(&hiwdg);
 
+	/* This function is called every 1m.
+	 * This 1ms timer is not very exact. */
+	sys_systemClock();
+
+
 #if INIT_SAVE_TO_MEMORY
 	/* Periodically save the status to the memory */
 	s_ROM_main();
@@ -44,12 +49,12 @@ void sys(void){
 
 #if INIT_STANDBY_FUNCTIONALITY
 	/* Check if to put the system to sleep or not. */
-	if(sys_checkSleep() == SLEEP) {
+	if(s_checkSleep() == SLEEP) {
 #if INIT_SAVE_TO_MEMORY
 		/* Save the device state before sleeping */
-		sys_saveBeforeSleep();
+		s_ROM_saveNow();
 #endif /* INIT_SAVE_INTERNAL_MEMORY */
-		sys_enterStandby();
+		s_enterStandbyNow();
 	}
 #endif /* INIT_STANDBY_FUNCTIONALITY */
 
@@ -61,6 +66,11 @@ void sys(void){
 	/* blink led to show device status */
 	s_statusLed_main();
 #endif /* INIT_SYS_STAT_LED */
+
+#if INIT_SYS_BUFFER
+	/* Handles the data buffer */
+	s_buffer_main();
+#endif /* INIT_SYS_BUFFER */
 
 	/* Shows the system up time on the top status bar */
 	sys_upTime();

@@ -22,9 +22,17 @@ typedef enum {
 }syswakeup_t;
 
 /* This function is called to make the system enter standby mode*/
-void sys_enterStandby(void);
-/************************************************************************************/
+void s_enterStandbyNow(void);
 
+
+/* This function is called periodically to check whether to sleep or not. */
+syswakeup_t s_checkSleep(void);
+
+/* This function is called when the system first boots,
+ * this function will return SLEEP or AWAKE. The system then
+ * knows whether to sleep again, or stay awake. */
+syswakeup_t s_checkWakeup(void);
+/************************************************************************************/
 
 
 

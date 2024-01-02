@@ -6,6 +6,9 @@
  */
 #include "sys_savetomemory.h"
 
+#if INIT_SAVE_TO_MEMORY
+
+
 #if INIT_SAVE_EXTERNAL_MEMORY
 #include "w25qxx.h"
 #endif
@@ -19,7 +22,6 @@ uint8_t s_ROMConsoleSpace = RESET;
 #endif
 extern uint8_t key[16];
 
-
 uint32_t s_tickSave = RESET;
 s_ROMdataStruct s_ROMdata = {0};
 
@@ -31,7 +33,9 @@ typedef struct {
 	uint8_t flags;
 	_Bool keepOn;
 	uint8_t key[16];
+#if INIT_SYS_HAS_BATTERY
 	uint8_t batt;
+#endif /* INIT_SYS_HAS_BATTERY */
 }s_saveToFlashStruct;
 s_saveToFlashStruct save = {0};
 
@@ -56,7 +60,9 @@ void s_ROMSave(void){
 
 	save.keepOn = sysData.sys.keepOn;
 	memcpy(save.key, key, sizeof(key));
+#if INIT_SYS_HAS_BATTERY
 	save.batt = sysData.sys.batteryPercent;
+#endif /* INIT_SYS_HAS_BATTERY */
 	save.flags = flags;
 
 
@@ -86,7 +92,9 @@ void s_ROMLoad(void){
 	 * to 'save' structure. That structure will automatically be written to
 	 * the non volatile memory chosen. */
 	sysData.sys.keepOn = save.keepOn;
+#if INIT_SYS_HAS_BATTERY
 	sysData.sys.batteryPercent = save.batt;
+#endif /* INIT_SYS_HAS_BATTERY */
 	memcpy(key, save.key, sizeof(key));
 }
 
@@ -115,6 +123,10 @@ void s_ROM_main(void){
 		s_ROMdata.forceSave = RESET;
 		s_ROMSave();
 	}
+}
+
+void s_ROM_saveNow(void){
+	s_ROMSave();
 }
 
 
@@ -178,7 +190,9 @@ void s_loadFromExternalMemory(s_saveToFlashStruct* saveStruct, size_t sizeOfTheB
 
 		save.keepOn = sysData.sys.keepOn;
 		memcpy(save.key, key, sizeof(key));
+#if INIT_SYS_HAS_BATTERY
 		save.batt = sysData.sys.batteryPercent;
+#endif /* INIT_SYS_HAS_BATTERY */
 		save.flags = flags;
 
 
@@ -218,31 +232,13 @@ void s_loadFromInternalMemory(s_saveToFlashStruct* saveStruct, size_t sizeOfTheB
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* This function is added to the sys clock function that will call it every 1ms. */
 void s_ROM_tick(void){
 	s_tickSave++;
 }
 
 
-
-
-
+#endif /* INIT_SAVE_TO_MEMORY */
 
 
 

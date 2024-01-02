@@ -12,22 +12,22 @@
 /* This function allows us to port SYSTICK (or any 1ms timer) to
  * different parts of the system. Unlocking BareMetal multitasking.
  * Add timer functions here: */
+_Bool tick = RESET;
 void sys_systemClock(void){
-	/* Here we should see counters, counting up every 1ms. */
-	sys_addTimer();
-	buffer_addTimer();
-	tasks_addTimer();
-	interface_clock();
-
+	if(tick){
+		/* Here we should see counters, counting up every 1ms. */
+		sys_addTimer();
+		s_buffer_tick();
+		tasks_addTimer();
+		interface_clock();
 #if INIT_SYS_STAT_LED
-	s_statLed_tick();
+		s_statLed_tick();
 #endif /* INIT_SYS_STAT_LED */
-
 #if INIT_SAVE_TO_MEMORY
-	s_ROM_tick();
+		s_ROM_tick();
 #endif /* INIT_SAVE_TO_MEMORY */
-
+	}
 }
 /* This is the timer callback. Feel free to use a different timer.
  * This functions is platform specific. Adjust to your needs. */
-void HAL_SYSTICK_Callback(void){sys_systemClock();}
+void HAL_SYSTICK_Callback(void){tick = SET;}
