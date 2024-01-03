@@ -1,4 +1,4 @@
-# theGreatKernel
+# MicroKernel
 ### A light kernel like system for low-end microcontrollers. Optimized for the W25Q64 flash and STM32f103.
 
 ## Description:
