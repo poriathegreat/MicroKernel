@@ -5,22 +5,25 @@
  *      Author: PoriaTheGreat
  */
 #include "system_internal.h"
+#include "interface.h"
 /* The watch dog handle. We will refresh the watch dog in the sys() function. */
 extern IWDG_HandleTypeDef hiwdg;
 /************************************************************************************/
 /*                                 Private Variables                                */
 /************************************************************************************/
-/* Initialize the sysData structure. This structure is only initialized here
- * it is defined and exported in the sys.h file to be used across the system. */
-sysDataStructure_t sysData = {0};
+///* Initialize the sysData structure. This structure is only initialized here
+// * it is defined and exported in the sys.h file to be used across the system. */
+//sysDataStructure_t sysData = {0};
 /* The timer and flag arrays. This array is built during compile time
  * with a fixed size of NUMBER_OF_SYS_ which is automatically adjusted in the
- * relevant enum. */
+ * relevant ENUM. */
 uint32_t sysTimersArray[SYSTIMERS_TOTAL] = {0};
 /* The debug space requested. */
 #if INIT_SYS_REQUEST_CONSOLE_DEBUG
 uint8_t sys_consoleSpace = RESET;
 #endif /* INIT_SYS_REQUEST_DEBUG */
+sysInfoStructure_t sysData = {0};
+
 /************************************************************************************/
 /*                                Private Functions                                 */
 /************************************************************************************/
@@ -80,7 +83,7 @@ void sys(void){
 }
 
 /* Add this function to a 1ms timer call back to enable timed multitasking */
-void sys_addTimer(void){
+void system_tick(void){
 	for(uint8_t timer = RESET ; timer < SYSTIMERS_TOTAL ; timer++){
 		sysTimersArray[timer]++;
 	}

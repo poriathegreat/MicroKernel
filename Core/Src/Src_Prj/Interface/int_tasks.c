@@ -10,20 +10,10 @@
 #include "interface.h"
 #include "tasks.h"
 
-taskData_t taskData = {0};
-
-
-
-
-
-
 
 
 void interface_tasks(void){
 	/* All the running tasks are called from here. */
-
-
-
 
 
 

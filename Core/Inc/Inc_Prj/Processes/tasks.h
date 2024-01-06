@@ -63,7 +63,7 @@ void tasks_firstInit(void);
 
 
 /* Functions to access flags and timers publicly. */
-void tasks_addTimer(void);
+void tasks_tick(void);
 uint32_t tasks_timerCheck(uint8_t i);
 void tasks_timerReset(uint8_t i);
 _Bool task_flagConf(uint16_t flag, _Bool state);

@@ -10,26 +10,8 @@
 /************************************************************************************/
 /*                               Included Libraries                                 */
 /************************************************************************************/
-/* Include the system */
+/* Include types */
 #include "sys.h"
-
-#if INIT_SYS_HAS_BATTERY
-#include "sys_battery.h"
-#endif
-#if INIT_STANDBY_FUNCTIONALITY
-#include "sys_standby.h"
-#endif
-#if INIT_CONFIGURE_PIN_STATE
-#include "sys_configure_io.h"
-#endif
-#if INIT_SAVE_TO_MEMORY
-#include "sys_savetomemory.h"
-#endif
-#if INIT_SYS_STAT_LED
-#include "sys_statusled.h"
-#endif
-#include "sys_loadserialnumber.h"
-
 /************************************************************************************/
 /*                                  Private Macros                                  */
 /************************************************************************************/
@@ -51,15 +33,10 @@ enum sysTimers{
 	TIMERS_SYS_UPTIME,
 	SYSTIMERS_TOTAL				//This has to be the last element on the list.
 };
-
-
 /************************************************************************************/
 /*                               Exported Variables                                 */
 /************************************************************************************/
 extern uint8_t sys_infoSpace;
-
-
-
 /************************************************************************************/
 /*                                Exported functions                                */
 /************************************************************************************/
@@ -73,7 +50,7 @@ void sys_fetchData(void);
 void sys_upTime(void);
 
 /* Add this function to the system 1ms timer.   */
-void sys_addTimer(void);
+void system_tick(void);
 
 /* Use this function to check a specific timer. */
 uint32_t sys_timerCheck(uint8_t timer);

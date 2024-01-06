@@ -53,10 +53,6 @@
 /********************************************************************************/
 #include "flashMemoryController.h"
 
-#if DEBUGFCTR
-#include "debug.h"
-#endif
-
 
 #ifdef IC_W25Qxx
 #include "w25qxx.h"

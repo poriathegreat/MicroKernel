@@ -14,7 +14,7 @@
  * For deeper detail, look into sys_clock.c
  *
  * Add timer functions here: */
-void interface_clock(void){
+void interface_tick(void){
 	/* Here we should see counters,
 	 * counting up every 1ms. */
 

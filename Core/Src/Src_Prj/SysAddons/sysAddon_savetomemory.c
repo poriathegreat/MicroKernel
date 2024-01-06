@@ -5,13 +5,16 @@
  *      Author: HP
  */
 #include "sys_savetomemory.h"
-
+#include "interface.h"
 #if INIT_SAVE_TO_MEMORY
 
 
 #if INIT_SAVE_EXTERNAL_MEMORY
 #include "w25qxx.h"
-#endif
+#else
+#include "internalFlash.h"
+#endif /* INIT_SAVE_EXTERNAL_MEMORY */
+
 
 #define DEBUGROM 					1
 #define ROM_SAVE_PERIOD_MINUTES		5
@@ -58,10 +61,10 @@ void s_ROMSave(void){
 	 * the non volatile memory chosen. */
 	uint8_t flags = 0;
 
-	save.keepOn = sysData.sys.keepOn;
+	save.keepOn = interfaceData.sys->keepOn;
 	memcpy(save.key, key, sizeof(key));
 #if INIT_SYS_HAS_BATTERY
-	save.batt = sysData.sys.batteryPercent;
+	save.batt = interfaceData.sys->battery->percentage;
 #endif /* INIT_SYS_HAS_BATTERY */
 	save.flags = flags;
 
@@ -91,9 +94,9 @@ void s_ROMLoad(void){
 	/* Configure this part of the code to copy what every needs to be saved
 	 * to 'save' structure. That structure will automatically be written to
 	 * the non volatile memory chosen. */
-	sysData.sys.keepOn = save.keepOn;
+	interfaceData.sys->keepOn = save.keepOn;
 #if INIT_SYS_HAS_BATTERY
-	sysData.sys.batteryPercent = save.batt;
+	interfaceData.sys->battery->percentage = save.batt;
 #endif /* INIT_SYS_HAS_BATTERY */
 	memcpy(key, save.key, sizeof(key));
 }
@@ -108,9 +111,11 @@ void s_ROMLoad(void){
  * This function will load the saved data from the internal memory,
  * the data read is then parsed in a different function. */
 void s_ROM_init(void){
+#if DEBUGGING
 #if DEBUGROM
 	s_ROMConsoleSpace = console_requestSpace(2, "ROM");
-#endif
+#endif /* DEBUGROM */
+#endif /* DEBUGGING */
 	s_ROMLoad();
 }
 
@@ -136,9 +141,11 @@ void s_saveToMemory(uint8_t* bufferToSave, size_t sizeOfTheBuffer){
 #else
 	s_saveToInternalMemory(bufferToSave, sizeOfTheBuffer);
 #endif
+#if DEBUGGING
 #if DEBUGROM
 	console_printf(s_ROMConsoleSpace + 1, CONSOLE_PART_ONE, "Wrote: %s", bufferToSave);
 #endif /* DEBUGROM */
+#endif /* DEBUGGING */
 }
 
 
@@ -188,10 +195,10 @@ void s_loadFromExternalMemory(s_saveToFlashStruct* saveStruct, size_t sizeOfTheB
 
 		uint8_t flags = 0;
 
-		save.keepOn = sysData.sys.keepOn;
+		save.keepOn = interfaceData.sys->keepOn;
 		memcpy(save.key, key, sizeof(key));
 #if INIT_SYS_HAS_BATTERY
-		save.batt = sysData.sys.batteryPercent;
+		save.batt = interfaceData.sys->battery->percentage;
 #endif /* INIT_SYS_HAS_BATTERY */
 		save.flags = flags;
 
@@ -207,9 +214,11 @@ void s_loadFromExternalMemory(s_saveToFlashStruct* saveStruct, size_t sizeOfTheB
 		W25qxx_ReadSector(tempBuff, 0, 0, sizeof(s_saveToFlashStruct));
 		memcpy(&save, tempBuff, sizeof(s_saveToFlashStruct));
 	}
+#if DEBUGGING
 #if DEBUGROM
 	console_printf(s_ROMConsoleSpace, CONSOLE_PART_TWO, "Read: %s", tempBuff);
 #endif /* DEBUGROM */
+#endif /* DEBUGGING */
 }
 #else
 void s_loadFromInternalMemory(s_saveToFlashStruct* saveStruct, size_t sizeOfTheBuffer){

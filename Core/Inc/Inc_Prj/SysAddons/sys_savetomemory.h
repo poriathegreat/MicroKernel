@@ -11,7 +11,7 @@
 /*                               Included Libraries                                 */
 /************************************************************************************/
 /* Include the system */
-#include "sys.h"
+#include "system_setup.h"
 
 #if INIT_SAVE_TO_MEMORY
 
@@ -20,13 +20,6 @@
 #if !INIT_SAVE_EXTERNAL_MEMORY
 #define INTERNALMEMORY_ENDADRESS				0x08020000
 #endif /* INIT_SAVE_EXTERNAL_MEMORY */
-
-#if INIT_SAVE_EXTERNAL_MEMORY
-#include "w25qxx.h"
-#else
-#include "internalFlash.h"
-#endif /* INIT_SAVE_EXTERNAL_MEMORY */
-
 /************************************************************************************/
 
 typedef struct{

@@ -14,19 +14,20 @@ uint8_t sys_infoSpace = RESET;
 void sys_consoleSysInfo(void){
 	/* This will clear the current console. (This command may not be supported by some of the console viewers.)
 	 * It IS supported on PuTTy */
+#if DEBUGGING
 	debugprintf("\e[1;1H\e[2J\b");
 
 	/* Write the system version down for later use. */
-	sprintf(sysData.sys.version, SYS_VERSION);
+	sprintf(sysData.info.version, SYS_VERSION);
 
 	/* View the project info when the debug window starts up */
 	char BuildVersion[] = SYS_PROJECT_NAME " - Built (" __DATE__ "::" __TIME__ ")";
 	sys_infoSpace = console_requestSpace(3, BuildVersion);
 	console_printf(sys_infoSpace, CONSOLE_PART_ONE, "Serial Number");
-	console_printf(sys_infoSpace, CONSOLE_PART_TWO, "[%s]", sysData.sys.serialNumber);
+	console_printf(sys_infoSpace, CONSOLE_PART_TWO, "[%s]", sysData.info.serialNumber);
 	console_printf(sys_infoSpace+1, CONSOLE_PART_ONE, "Software Version");
-	console_printf(sys_infoSpace+1, CONSOLE_PART_TWO, "[%s]", sysData.sys.version);
+	console_printf(sys_infoSpace+1, CONSOLE_PART_TWO, "[%s]", sysData.info.version);
 	console_printf(sys_infoSpace+2, CONSOLE_PART_ONE, "System Counter");
-
+#endif /* DEBUGGING */
 }
 /************************************************************************************/

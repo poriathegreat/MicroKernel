@@ -8,9 +8,11 @@
 /*                               Included Libraries                                 */
 /************************************************************************************/
 #include "sys_battery.h"
+#include "interface.h"
 #if INIT_SYS_HAS_BATTERY
 
 uint8_t s_batteryConsoleSpace = RESET;
+s_batteryStructure s_batteryData = {0};
 
 #if BATTERY_READ_FROM_ADC
 extern ADC_HandleTypeDef BATTERYADC_HANDLE;
@@ -19,15 +21,15 @@ void s_batteryReadAdc(void){
 	if(HAL_ADC_PollForConversion(&BATTERYADC_HANDLE, 100) == HAL_OK){
 		uint32_t voltageRaw = HAL_ADC_GetValue(&BATTERYADC_HANDLE);
 		uint32_t voltageTemp = ( (voltageRaw * ADC_MAX_VOLTAGE * VOLTAGE_DIVIDER) / ADC_MAX_DIGITAL_VALUE) + VOLTAGE_OFFSET;
-		sysData.sys.batteryVoltage = ( (sysData.sys.batteryVoltage*95) + (voltageTemp)*5) / 100;
+		s_batteryData.voltage = ( (s_batteryData.voltage*95) + (voltageTemp)*5) / 100;
 
-		if( sysData.sys.batteryVoltage > VOLTAGE_THRESH_MAX_LOW ){
-			sysData.sys.batteryPercent = 100;
-		}else if ( sysData.sys.batteryVoltage < VOLTAGE_THRESH_MIN ){
-			sysData.sys.batteryPercent = 0;
+		if( s_batteryData.voltage > VOLTAGE_THRESH_MAX_LOW ){
+			s_batteryData.percentage = 100;
+		}else if ( s_batteryData.voltage < VOLTAGE_THRESH_MIN ){
+			s_batteryData.percentage = 0;
 		}else{
-			sysData.sys.batteryPercent =
-					( ( (sysData.sys.batteryVoltage - VOLTAGE_THRESH_MIN)*100) / (VOLTAGE_THRESH_MAX_LOW - VOLTAGE_THRESH_MIN) );
+			s_batteryData.percentage =
+					( ( (s_batteryData.voltage - VOLTAGE_THRESH_MIN)*100) / (VOLTAGE_THRESH_MAX_LOW - VOLTAGE_THRESH_MIN) );
 		}
 	}
 }
@@ -59,8 +61,10 @@ void s_checkbattery_main(void){
 #else
 		s_getBatteryFromAnotherSource();
 #endif /* BATTERY_READ_FROM_ADC */
-		console_printf(s_batteryConsoleSpace, CONSOLE_PART_TWO, "[%d]", sysData.sys.batteryVoltage);
-		console_printf(s_batteryConsoleSpace+1, CONSOLE_PART_TWO, "[%d]", sysData.sys.batteryPercent);
+#if DEBUGGING
+		console_printf(s_batteryConsoleSpace, CONSOLE_PART_TWO, "[%d]", sysData.info.batteryVoltage);
+		console_printf(s_batteryConsoleSpace+1, CONSOLE_PART_TWO, "[%d]", sysData.info.batteryPercent);
+#endif /* DEBUGGING */
 	}
 }
 
@@ -69,9 +73,11 @@ void s_battery_init(void){
 #if BATTERY_READ_FROM_ADC
 	HAL_ADC_Start(&hadc1);
 #endif
+#if DEBUGGING
 	s_batteryConsoleSpace = console_requestSpace(2, "Battery Information");
 	console_printf(s_batteryConsoleSpace, CONSOLE_PART_ONE, "System Voltage");
 	console_printf(s_batteryConsoleSpace+1, CONSOLE_PART_ONE, "System Battery");
+#endif /* DEBUGGING */
 }
 
 

@@ -12,7 +12,7 @@
 /*                               Included Libraries                                 */
 /************************************************************************************/
 /* Include the system */
-#include "sys.h"
+#include "system_setup.h"
 
 /* Check if this part of the system is enabled. */
 #if INIT_SYS_HAS_BATTERY
@@ -55,12 +55,21 @@
 #endif /* BATTERY_READ_FROM_ADC */
 
 
+typedef struct{
+	uint16_t voltage;
+	uint8_t percentage;
+}s_batteryStructure;
+extern s_batteryStructure s_batteryData;
+
 /* This function is automatically added to the sys_init() function. Nothing more to do here.*/
 void s_battery_init();
 
 /* This function is automatically added to the sys() function. Nothing more to do here.*/
 void s_checkbattery_main(void);
 
+/* This function will handle the non blocking timing.
+ * It will be added to the system automatically, nothing more to it. */
+void s_battery_tick(void);
 
 
 #endif /* INIT_SYS_HAS_BATTERY */

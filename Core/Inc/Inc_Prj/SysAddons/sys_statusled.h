@@ -12,7 +12,7 @@
 /*                               Included Libraries                                 */
 /************************************************************************************/
 /* Include the system */
-#include "sys.h"
+#include "system_setup.h"
 
 #if INIT_SYS_STAT_LED
 #define _STAT_LED_GPIO							LED_GPIO_Port
@@ -43,7 +43,7 @@ typedef struct{
 	uint8_t 	deviceState;
 	_Bool 		anti;
 }s_statLed_struct;
-extern s_statLed_struct s_statLed_data;
+extern s_statLed_struct s_statLedData;
 
 
 

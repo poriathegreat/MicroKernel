@@ -5,7 +5,7 @@
 /*                               Included Libraries                                 */
 /************************************************************************************/
 /* Include the system */
-#include "sys.h"
+#include "main.h"
 /************************************************************************************/
 /*                                 Exported Macros                                  */
 /************************************************************************************/
@@ -21,7 +21,7 @@
  *
  * The rest of the system could use this macro as a preprocessor to keep the
  * debug lines from being compiled. */
-#define DEBUGGING			(1)
+#define DEBUGGING			(0)
 /*****************************************************************************/
 /* This is where the debug of each part of the system is controlled.
  * There should be TWO instances of each of these MACROS,
@@ -29,7 +29,7 @@
  * one in the header file of the specific library for modular use.
  * (I personally enable all the needed debug from here.) */
 #define DEBUGFLASH			(0)
-#define DEBUGFCTR			(1)
+#define DEBUGFCTR			(0)
 
 /*****************************************************************************/
 /* The deep debug is used to spit out low level data straight into the terminal

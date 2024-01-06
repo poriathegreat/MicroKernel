@@ -17,7 +17,7 @@ uint32_t 	tasksTimersArray[TASKTIMERS_TOTAL]	=	{0};
 _Bool 		taskFlagsArray[TASKFLAGS_TOTAL] 		= 	{0};
 
 
-void tasks_addTimer(void){
+void tasks_tick(void){
 	for(uint8_t i = 0; i<TASKTIMERS_TOTAL; i++){
 		tasksTimersArray[i]++;
 	}

@@ -8,6 +8,7 @@
 /*                               Included Libraries                                 */
 /************************************************************************************/
 #include "sys_loadserialnumber.h"
+#include "interface.h"
 /************************************************************************************/
 /* The device serial number if INIT_LOAD_SERIAL_FROM_MEMORY is disabled. */
 #if !INIT_LOAD_SERIAL_FROM_MEMORY
@@ -28,6 +29,6 @@ void s_loadSerialNumber(void){
 #if INIT_LOAD_SERIAL_FROM_MEMORY
 	s_loadSerialNumberFromExternalMemory(sysData.sys.serialNumber);
 #else
-	memcpy(sysData.sys.serialNumber, hardcodedSerial, sizeof(hardcodedSerial));
+	memcpy(interfaceData.sys->serialNumber, hardcodedSerial, sizeof(hardcodedSerial));
 #endif
 }

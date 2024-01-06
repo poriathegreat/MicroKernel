@@ -15,16 +15,16 @@
  * using a single LED. */
 void s_defaultLed(void);
 
-s_statLed_struct s_statLed_data = {0};
+s_statLed_struct s_statLedData = {0};
 
 
 uint8_t s_getBlinksFromStatus(void){
 	uint8_t result;
-	if 		(s_statLed_data.deviceState == 1) result = 2;
-	else if (s_statLed_data.deviceState == 2) result = 4;
-	else if (s_statLed_data.deviceState == 3) result = 6;
-	else if (s_statLed_data.deviceState == 4) result = 10;
-	else if (s_statLed_data.deviceState == 5) result = 16;
+	if 		(s_statLedData.deviceState == 1) result = 2;
+	else if (s_statLedData.deviceState == 2) result = 4;
+	else if (s_statLedData.deviceState == 3) result = 6;
+	else if (s_statLedData.deviceState == 4) result = 10;
+	else if (s_statLedData.deviceState == 5) result = 16;
 	else 	result = 2;
 	return result;
 }
@@ -117,7 +117,7 @@ void s_defaultLed(void){
 			ledTimers[LEDTIMER_STATUS_LED_BLINK_INT] = RESET;
 		}
 	}else {
-		if(s_statLed_data.anti){
+		if(s_statLedData.anti){
 			HAL_GPIO_WritePin(_STAT_LED_GPIO, _STAT_LED_Pin, SET);
 		}else {
 			HAL_GPIO_WritePin(_STAT_LED_GPIO, _STAT_LED_Pin, RESET);

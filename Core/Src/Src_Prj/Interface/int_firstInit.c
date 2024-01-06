@@ -11,8 +11,14 @@
 #include "interface.h"
 
 
+interfaceDataStructure_t interfaceData = {0};
+
+
 
 void interface_firstInit(void){
+	interfaceData.sys = &sysData;
+
+
 
 
 }

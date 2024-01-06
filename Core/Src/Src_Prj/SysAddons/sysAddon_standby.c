@@ -8,7 +8,7 @@
 /*                               Included Libraries                                 */
 /************************************************************************************/
 #include "sys_standby.h"
-
+#include "interface.h"
 #if INIT_STANDBY_FUNCTIONALITY
 
 /* This function will make the MCU enter Standby Mode
@@ -31,10 +31,10 @@ syswakeup_t s_checkWakeup(void){
 	/* For the system to wake up, one of the following conditions must be met. */
 	if(
 			/* Edit these conditions to suit the needs of the project */
-			(sysData.sys.keepOn == SET)	/* If the keepAwake flag is set*/
+			(interfaceData.sys->keepOn == SET)	/* If the keepAwake flag is set*/
 #if INIT_SYS_HAS_BATTERY
 			||
-			(sysData.sys.batteryPercent > 1)	/* If we have enough power. */
+			(interfaceData.sys->battery->percentage > 1)	/* If we have enough power. */
 #endif /* INIT_SYS_HAS_BATTERY */
 #if CHARGER_DETECT_GPIO
 			||
@@ -60,10 +60,10 @@ syswakeup_t s_checkSleep(void){
 	/* For the system to sleep, all of the following conditions must be met. */
 	if(
 			/* Edit these conditions to suit the needs of the project */
-			(sysData.sys.keepOn == RESET)	/* If the keepAwake flag is not set*/
+			(interfaceData.sys->keepOn == RESET)	/* If the keepAwake flag is not set*/
 #if INIT_SYS_HAS_BATTERY
 			||
-			(sysData.sys.batteryPercent == 0)
+			(interfaceData.sys->battery->percentage == 0)
 #endif /* INIT_SYS_HAS_BATTERY */
 	){
 		result = SLEEP;

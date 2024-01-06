@@ -12,7 +12,8 @@
 /*                               Included Libraries                                 */
 /************************************************************************************/
 /* Include the system */
-#include "sys.h"
+#include <main.h>
+#include "system_setup.h"
 /************************************************************************************/
 /*                                 Exported Macros                                  */
 /************************************************************************************/
@@ -29,7 +30,8 @@
 typedef struct{
 	_Bool dataWaiting;
 	_Bool encryptionEnabled;
-}bufferDataStructure_t;	extern bufferDataStructure_t bufferData;
+}bufferDataStructure_t;
+extern bufferDataStructure_t s_bufferData;
 /************************************************************************************/
 /*                                Exported functions                                */
 /************************************************************************************/

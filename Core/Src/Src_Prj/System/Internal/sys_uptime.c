@@ -22,7 +22,9 @@ void sys_upTime(void){
 			sysMinutes = RESET;
 			sysHours++;
 		}
+#if DEBUGGING
 		console_printf(sys_infoSpace+2, CONSOLE_PART_TWO, "[%d:%02d:%02d]   ", sysHours, sysMinutes, sysSeconds );
+#endif /* DEBUGGING */
 	}
 }
 

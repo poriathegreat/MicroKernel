@@ -18,6 +18,8 @@
 #include "flashMemoryController.h"
 #endif /* BUFFER_USE_EXTERNAL_FLASH */
 
+#include "interface.h"
+//#include "task_collectData.h"
 
 /************************************************************************************/
 /*                               Private Definitions                                */
@@ -41,7 +43,7 @@ enum eventTimers{
 uint32_t bufferTimersArray	[BUFFERTIMERS_TOTAL]	= {0};
 uint8_t bufferCells			[ ( (BUFFER_CELLS_IN_RAM+1)*256 ) ] 		= {0};	/* This format was used instead of 2D arrays. This format could be written in the flashMemory directly. */
 uint8_t* bufferCellsSize = bufferCells+(BUFFER_CELLS_IN_RAM*256);
-bufferDataStructure_t bufferData = {0};
+bufferDataStructure_t s_bufferData = {0};
 
 uint8_t key[16] = {
 		0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
@@ -61,7 +63,7 @@ HAL_StatusTypeDef buffer_encryptBeforePassing(uint8_t *data, size_t dataSize){
 	HAL_StatusTypeDef ret = HAL_ERROR;
 
 #if BUFFER_USE_ENCRYPTION
-	if(bufferData.encryptionEnabled == SET){
+	if(s_bufferData.encryptionEnabled == SET){
 		size_t newDataSize[1] = {0};
 		newDataSize[0] = dataSize;
 
@@ -69,7 +71,7 @@ HAL_StatusTypeDef buffer_encryptBeforePassing(uint8_t *data, size_t dataSize){
 		uint8_t ciphertext[256] = {0};
 
 		aes_ctr_encrypt(key, iv, data, ciphertext+8, newDataSize);
-		memcpy(ciphertext, sysData.sys.serialNumber, 8);
+		memcpy(ciphertext, interfaceData.sys->serialNumber, 8);
 		newDataSize[0] = newDataSize[0] + 8 ;
 
 		if(interface_passDataToNextLayer(ciphertext,newDataSize[0]) == HAL_OK){
@@ -115,7 +117,7 @@ HAL_StatusTypeDef buffer_addToBuffer(uint8_t *data, size_t dataSize){
 	if(cell < BUFFER_CELLS_IN_RAM){
 		bufferCellsSize[ cell ] = dataSize;
 		memcpy(bufferCells + (cell*256) , data , dataSize );
-		bufferData.dataWaiting = SET;
+		s_bufferData.dataWaiting = SET;
 		result = HAL_OK;
 	}
 
@@ -132,7 +134,7 @@ HAL_StatusTypeDef buffer_addToBuffer(uint8_t *data, size_t dataSize){
 			 * We can use any cell, I used the first cell, cell zero. */
 			bufferCellsSize[ 0 ] = dataSize;
 			memcpy(bufferCells + (0*256), data , dataSize );
-			bufferData.dataWaiting = SET;
+			s_bufferData.dataWaiting = SET;
 			result = HAL_OK;
 		}
 	}
@@ -212,10 +214,10 @@ void s_buffer_main(void){
 				memset(bufferCells + (cellWithData*256), 0, 256);
 				bufferCellsSize[cellWithData] = RESET;
 			}
-			bufferData.dataWaiting = SET;
+			s_bufferData.dataWaiting = SET;
 		}else {
 			bufferTimersArray[TIMERS_BUFFER_WAIT_TIME] = RESET;
-			bufferData.dataWaiting = RESET;
+			s_bufferData.dataWaiting = RESET;
 		}
 	}
 #endif /* BUFFER_DATA_ENABLED */

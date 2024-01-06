@@ -9,6 +9,7 @@
 /************************************************************************************/
 /* Include the system internal functions */
 #include "system_internal.h"
+#include "interface.h"
 /* This function will run once when the system starts */
 void sys_firstInit(void){
 #if INIT_CONFIGURE_PIN_STATE
@@ -25,6 +26,7 @@ void sys_firstInit(void){
 #if INIT_SAVE_TO_MEMORY
 	/* Read the status from the memory */
 	s_ROM_init();
+	sysData.rom = &s_ROMdata;
 #endif /* INIT_SAVE_TO_MEMORY */
 
 	/* Load the serial Number */
@@ -35,6 +37,7 @@ void sys_firstInit(void){
 
 #if INIT_SYS_HAS_BATTERY
 	s_battery_init();
+	sysData.battery = &s_batteryData;
 #endif /* INIT_SYS_HAS_BATTERY */
 
 #if INIT_SYS_LOCK_UUID
@@ -49,10 +52,15 @@ void sys_firstInit(void){
 #if INIT_SYS_BUFFER
 	/* Handles the data buffer */
 	s_buffer_init();
+	sysData.buffer = &s_bufferData;
 #endif /* INIT_SYS_BUFFER */
 
-	interface_firstInit();
+#if INIT_SYS_STAT_LED
+	sysData.ledStat = &s_statLedData;
+#endif /* INIT_SYS_STAT_LED */
 
+
+	interface_firstInit();
 }
 
 /************************************************************************************/

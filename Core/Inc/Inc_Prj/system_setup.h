@@ -6,6 +6,8 @@
  */
 #ifndef INC_INC_PRJ_SYSTEMSETUP_H_
 #define INC_INC_PRJ_SYSTEMSETUP_H_
+#include <main.h>
+#include <stdint.h>
 /* To add a library to the project:
  *
  * 1. add the library_addTimer() function to the ../Core/Src/Interface/interface_systemClock() function.
@@ -87,7 +89,7 @@ extern uint8_t sys_consoleSpace;
  * loaded from MCU hardware. In other words, the code is locked to a single MCU.
  * To check the current UUID, comment the UUID_LOCKED_TO line, then the MCU will not
  * boot, but will show the current UUID. */
-#define INIT_SYS_LOCK_UUID						(1)
+#define INIT_SYS_LOCK_UUID						(0)
 #if INIT_SYS_LOCK_UUID
 #define UUID_LOCKED_TO			{0x52,0xFF,0x6D,0x06,0x48,0x65,0x84,0x49,0x12,0x22,0x19,0x67}
 #endif /* INIT_SYS_LOCK_UUID */
