@@ -1,3 +1,81 @@
+# Design Details
+### The details on how everything works, this part should provide a complete understanding of the kernel layers.
+## The Overview
+```mermaid
+mindmap
+root(sys_setup.h is where you need to start. This will configure the system addons automatically.)
+    systemAddons(By editing sys_setup.h file, the sys_addons.h file now has a few libraries that are included. We need to edit those libraries.)
+        (We add the modules, sensors, etc. to the interface folder. Each module library should be placed in interface/LIB/libraryFolder)
+        (The data collected by INTERFACE is proccessed here by different "tasks".)
+````
+
+```mermaid
+
+---
+title: Animal example
+---
+classDiagram
+    note "From Duck till Zebra"
+    Animal <|-- Duck
+    note for Duck "can fly\ncan swim\ncan dive\ncan help in debugging"
+    Animal <|-- Fish
+    Animal <|-- Zebra
+    Animal : +int age
+    Animal : +String gender
+    Animal: +isMammal()
+    Animal: +mate()
+    class Duck{
+        +String beakColor
+        +swim()
+        +quack()
+    }
+    class Fish{
+        -int sizeInFeet
+        -canEat()
+    }
+    class Zebra{
+        +bool is_wild
+        +run()
+    }
+
+````
+## The Interface Layer
+
+```mermaid
+
+---
+title: The Interface Layer
+---
+mindmap
+        (The Interface Layer will collect data from every aspect of the system)
+            (Temperature Sensor)
+            (Humidity Sensor)
+            (Proximity Sensor)
+            (BLE Module)
+            (GSM Module)
+            (ESP WiFi)
+            (CAN BUS)
+            (RS485 BUS)
+````
+## The Tasks Layer
+
+```mermaid
+
+---
+title: The Tasks Layer
+---
+mindmap
+        (The Tasks Layer will collect data from every aspect of the system)
+            (Check Temperature for more than 70C)
+            (Process data received on RS485)
+            (Refresh the LCD)
+            (Check GPS position for change)
+            (Check Humidity and sound the ALARM if more than 80%)
+            (Check MOTION SENSOR for movement in Z-axes)
+            (Process data received on CAN BUS)
+            (Check hearbeat for less than 50bpm)
+````
+
 # MicroKernel
 ### A light kernel like system for low-end microcontrollers. Optimized for the W25Q64 flash and STM32f103.
 
@@ -137,6 +215,7 @@ and so on with every aspect of the system.
 # Design Details
 ### The details on how everything works, this part should provide a complete understanding of the kernel layers.
 ## The System:
+
 
 
 
