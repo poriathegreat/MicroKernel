@@ -1,8 +1,8 @@
 # MicroKernel
 ### A light kernel like system for low-end microcontrollers. Optimized for the W25Q64 flash and STM32f103.
 
-## Description:
-A light kernel to unlock baremetal multitasking on low end microcontrollers.
+## Description
+###A light kernel to unlock baremetal multitasking on low end microcontrollers.
 Using the system_setup.h file, a baremetal system with multitasking and most initial features 
 will be setup in the matter of minutes. 
 
@@ -68,17 +68,19 @@ However, on smaller RAM/FLASH, you can only fit so little.
 
 The Solution:
 A light weight system, with the necessary features needed to quickly get started.
-This system would need two main parts:
+This system would need four main parts:
 1. The system its self
-2. The user added "tasks"
+2. The "Interfaces", system aspects that collect data and provide interaction with outside of the MCU.
+3. The "Tasks", processes running at all time, reading and writing data collected and produced by the interfaces.
+4. The passData layer, the data processed and ready to be passed to the master system (a server, ble connection, RS485 port, CAN bus, ...)
 
 The system would handle the timing, the watchdog, a status led, battery checking, debugging, etc...
-The interface would handle different aspects added to the system, their initialization, their data storage and handling, etc....
-The tasks would processed the data received and stored in the structures of each senosr/aspect of the system, and create signals based on it.
-The signals either immediately take effect on the system (change I/O, shutoff, restart a module, ...) or they add something to the buffer to be processed futher down the line.
+The interface would handle data collection of different aspects added to the system, their initialization, their data storage and handling, etc....
+The tasks would processe the data collected in the structures of each senosr/aspect of the system, and create signals based on it.
+The signals either immediately take effect on the system (change I/O, show something on LCD, shutoff the system, restart a module, ...) or they add something to the buffer to be processed futher down the line (sent to a server/ ble/ RS485 ...).
 
-The Provided Structure:
-In this structure, each task should have the following functions:
+##The Provided Structure:
+###In this structure, each task should have the following functions:
 
     t_theExampleModule_init();
 This function will hold anything needed for the initialization of am aspect. 
