@@ -80,7 +80,8 @@ The tasks would processe the data collected in the structures of each senosr/asp
 The signals either immediately take effect on the system (change I/O, show something on LCD, shutoff the system, restart a module, ...) or they add something to the buffer to be processed futher down the line (sent to a server/ ble/ RS485 ...).
 
 ## The Provided Structure:
-### In this structure, each task should have the following functions:
+### This kernel follows the same simple structure for each and every part the system explained below. 
+In this structure, each task should have the following functions:
 
     t_theExampleModule_init();
 This function will hold anything needed for the initialization of am aspect. 
