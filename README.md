@@ -2,7 +2,7 @@
 ### A light kernel like system for low-end microcontrollers. Optimized for the W25Q64 flash and STM32f103.
 
 ## Description
-###A light kernel to unlock baremetal multitasking on low end microcontrollers.
+### A light kernel to unlock baremetal multitasking on low end microcontrollers.
 Using the system_setup.h file, a baremetal system with multitasking and most initial features 
 will be setup in the matter of minutes. 
 
@@ -79,8 +79,8 @@ The interface would handle data collection of different aspects added to the sys
 The tasks would processe the data collected in the structures of each senosr/aspect of the system, and create signals based on it.
 The signals either immediately take effect on the system (change I/O, show something on LCD, shutoff the system, restart a module, ...) or they add something to the buffer to be processed futher down the line (sent to a server/ ble/ RS485 ...).
 
-##The Provided Structure:
-###In this structure, each task should have the following functions:
+## The Provided Structure:
+### In this structure, each task should have the following functions:
 
     t_theExampleModule_init();
 This function will hold anything needed for the initialization of am aspect. 
