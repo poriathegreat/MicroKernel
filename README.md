@@ -397,17 +397,26 @@ functions within.
 }
 
 class interface_init{
-    interfaceDataStructure interfaceData;
-    interface_init()
-    interface_main()
-    interface_tick()
+We will add the library_init functions
+to this function. Interface_init
+function will be called once when
+the system starts.  
+*********************************
+    module1_init()
+    module2_init()
+    sensor1_init()
+    sensor2_init()
 }
 
 class interface_tick{
-    interfaceDataStructure interfaceData;
-    interface_init()
-    interface_main()
-    interface_tick()
+We will add the library_tick functions
+to this function. Interface_tick
+function will be called every 1ms.  
+*********************************
+    module1_tick()
+    module2_tick()
+    sensor1_tick()
+    sensor2_tick()
 }
 
 
@@ -421,6 +430,7 @@ to interface.
     structure interfaceDataStructure[
     sysInfoStructure_t* sys;
     module1Structure*   module1;
+    module2Structure*   module2;
     sensor1Structure*   sensor1;
     sensor2Structure    sensor2;
 ]
