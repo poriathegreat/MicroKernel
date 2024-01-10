@@ -168,7 +168,7 @@ taking no space."
         void sys_firstInit(void);
         void sys_main(void);
     }
-sys .. Note_SystemCreated
+sys .. Note_SystemReady
 class Note_SystemCreated{
 By this point we 
 have the system ready.
