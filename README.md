@@ -488,7 +488,16 @@ class sys{
         void sys_main(void);
     }
 
+class interfaceDataStructure{
+structure interfaceDataStructure[
+    sysInfoStructure_t* sys;
+    module1Structure*   module1;
+    module2Structure*   module2;
+    sensor1Structure*   sensor1;
+    sensor2Structure    sensor2;
+]
 
+}
 
 class tasks{
     interface_init()
@@ -497,6 +506,7 @@ class tasks{
 }
 
 sys --|> tasks : System will call the tasks layer
+interfaceDataStructure --|> tasks : Tasks will have access to the interfaceDataStructure
 
 class tasks_main{
 We will add the task_main functions
@@ -510,21 +520,19 @@ functions within.
     task4_main()
 }
 
-class task_init{
+class tasks_init{
 We will add the task_init functions
 to this function. Task_init
 function will be called once when
 the system starts.
 tasks_init will be called from here.
-    tasks_init();
-
     task1_init()
     task2_init()
     task3_init()
     task4_init()
 }
 
-class task_tick{
+class tasks_tick{
 We will add thetask_tick functions
 to this function. Task_tick
 function will be called every 1ms.
@@ -535,9 +543,10 @@ function will be called every 1ms.
 }
 
 
-tasks .. task_main
-tasks .. task_tick
-tasks .. task_init
+tasks .. tasks_main
+tasks .. tasks_tick
+tasks .. tasks_init
+tasks .. tasks_init
 
 
 
