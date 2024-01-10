@@ -388,7 +388,12 @@ class interface_main{
 We will add the library_main functions
 to this function. Interface_main
 function will continuously call the
-functions within.  
+functions within.
+tasks_main will be called from here,
+calling all the tasks once, then
+checking in on modules. 
+    tasks_main();
+ 
     module1_main()
     module2_main()
     sensor1_main()
@@ -399,7 +404,10 @@ class interface_init{
 We will add the library_init functions
 to this function. Interface_init
 function will be called once when
-the system starts.  
+the system starts.
+tasks_init will be called from here.
+    tasks_init();
+
     module1_init()
     module2_init()
     sensor1_init()
@@ -409,7 +417,11 @@ the system starts.
 class interface_tick{
 We will add the library_tick functions
 to this function. Interface_tick
-function will be called every 1ms.  
+function will be called every 1ms.
+tasks_tick will be called from
+here, calling every task timer once
+every 1ms.
+    tasks_tick();
     module1_tick()
     module2_tick()
     sensor1_tick()
@@ -456,7 +468,76 @@ mindmap
             (Check hearbeat for less than 50bpm)
 ````
 
+### The Tasks Flow
+```mermaid
+---
+title: The Tasks Layer
+---
+classDiagram
+class sys{
+        structure sysInfoStructure_t[
+        	--char                     serialNumber[16];
+        	--char                     version[10];
+            	--Bool                     keepOn;
+        	--uint8_t                  uuid[12];
+        	--s_ROMdataStruct*         rom;
+        	--s_statLed_struct*        ledStat;
+        	--bufferDataStructure_t*   buffer;
+        ]
+        void sys_firstInit(void);
+        void sys_main(void);
+    }
 
+
+
+class tasks{
+    interface_init()
+    interface_main()
+    interface_tick()
+}
+
+sys --|> tasks : System will call the tasks layer
+
+class tasks_main{
+We will add the task_main functions
+to this function. Tasks_main
+function will continuously call the
+functions within.
+ 
+    task1_main()
+    task2_main()
+    task3_main()
+    task4_main()
+}
+
+class task_init{
+We will add the task_init functions
+to this function. Task_init
+function will be called once when
+the system starts.
+tasks_init will be called from here.
+    tasks_init();
+
+    task1_init()
+    task2_init()
+    task3_init()
+    task4_init()
+}
+
+class task_tick{
+We will add thetask_tick functions
+to this function. Task_tick
+function will be called every 1ms.
+    task1_tick()
+    task2_tick()
+    task3_tick()
+    task4_tick()
+}
+
+
+tasks .. task_main
+tasks .. task_tick
+tasks .. task_init
 
 
 
