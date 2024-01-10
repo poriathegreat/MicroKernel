@@ -389,7 +389,6 @@ We will add the library_main functions
 to this function. Interface_main
 function will continuously call the
 functions within.  
-*********************************
     module1_main()
     module2_main()
     sensor1_main()
@@ -401,7 +400,6 @@ We will add the library_init functions
 to this function. Interface_init
 function will be called once when
 the system starts.  
-*********************************
     module1_init()
     module2_init()
     sensor1_init()
@@ -412,7 +410,6 @@ class interface_tick{
 We will add the library_tick functions
 to this function. Interface_tick
 function will be called every 1ms.  
-*********************************
     module1_tick()
     module2_tick()
     sensor1_tick()
