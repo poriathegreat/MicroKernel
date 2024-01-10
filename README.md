@@ -169,7 +169,7 @@ taking no space."
         void sys_main(void);
     }
 sys .. Note_SystemReady
-class Note_SystemCreated{
+class Note_SystemReady{
 By this point we 
 have the system ready.
 The sys_firstInit needs
