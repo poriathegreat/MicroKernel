@@ -169,7 +169,7 @@ mindmap
 ```mermaid
 
 ---
-title: 
+title: The System Layer
 ---
 classDiagram
 
@@ -314,13 +314,6 @@ taking no space."
 
 
     class sys{
-        #define BUFFER_DATA_ENABLED
-        #define CHECK_BUFFER_INTERVAL_MS
-        #define CHECK_BUFFER_WAIT_TIME
-        #define BUFFER_USE_ENCRYPTION
-        #define BUFFER_USE_EXTERNAL_FLASH
-        ----#define BUFFER_CELLS_IN_RAM_IF_NO_FLASH
-            *************
         structure sysInfoStructure_t[
         	--char                     serialNumber[16];
         	--char                     version[10];
@@ -346,10 +339,8 @@ super loop.
 }
 ````
 
-
-
 ## The Interface Layer
-
+### The Interface Overview
 ```mermaid
 mindmap
         (The Interface Layer will collect data from every aspect of the system)
@@ -361,6 +352,87 @@ mindmap
             (ESP WiFi)
             (CAN BUS)
             (RS485 BUS)
+````
+### The Interface Flow
+```mermaid
+---
+title: The Interface Layer
+---
+classDiagram
+class sys{
+        structure sysInfoStructure_t[
+        	--char                     serialNumber[16];
+        	--char                     version[10];
+            	--Bool                     keepOn;
+        	--uint8_t                  uuid[12];
+        	--s_ROMdataStruct*         rom;
+        	--s_statLed_struct*        ledStat;
+        	--bufferDataStructure_t*   buffer;
+        ]
+        void sys_firstInit(void);
+        void sys_main(void);
+    }
+
+
+
+class interface{
+    interfaceDataStructure interfaceData;
+    interface_init()
+    interface_main()
+    interface_tick()
+}
+
+sys --|> interface : System will call the interface layer
+
+class interface_main{
+We will add the library_main functions
+to this function. Interface_main
+function will continuously call the
+functions within.  
+*********************************
+    module1_main()
+    module2_main()
+    sensor1_main()
+    sensor2_main()
+}
+
+class interface_init{
+    interfaceDataStructure interfaceData;
+    interface_init()
+    interface_main()
+    interface_tick()
+}
+
+class interface_tick{
+    interfaceDataStructure interfaceData;
+    interface_init()
+    interface_main()
+    interface_tick()
+}
+
+
+class interfaceDataStructure{
+A pointer to the dataStructure of
+each system aspect should be added
+to interface.
+*********************************
+
+
+    structure interfaceDataStructure[
+    sysInfoStructure_t* sys;
+    module1Structure*   module1;
+    sensor1Structure*   sensor1;
+    sensor2Structure    sensor2;
+]
+
+}
+
+interface .. interface_main
+interface .. interface_tick
+interface .. interface_init
+interface .. interfaceDataStructure
+
+
 ````
 ## The Tasks Layer
 
