@@ -12,7 +12,7 @@
 /*                               Included Libraries                                 */
 /************************************************************************************/
 /* Include the system */
-#include "sys.h"
+#include "main.h"
 
 
 /* This function will read the deviceSerialNumber and write it to sysData.sys.serialNumber. */

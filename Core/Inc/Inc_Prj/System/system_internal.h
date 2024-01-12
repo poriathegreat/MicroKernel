@@ -43,9 +43,6 @@ extern uint8_t sys_infoSpace;
 /* Project information shown on the console when the device is turned on. */
 void sys_consoleSysInfo(void);
 
-/* Fetch data from different parts of the system. */
-void sys_fetchData(void);
-
 /* This will show the system up time on top of the status bar. */
 void sys_upTime(void);
 
@@ -64,5 +61,8 @@ void s_readUuid(void);
 /* This function will add a debug space to the console window. */
 void sys_consoleRequest(void);
 
+/* Add this to the 1ms timer of the system.
+ * */
+void sys_systemClock(void);
 
 #endif /* INC_INC_PRJ_SYSTEM_SYSTEM_INTERNAL_H_ */

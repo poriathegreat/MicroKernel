@@ -19,7 +19,6 @@ void sys_systemClock(void){
 		/* Here we should see counters, counting up every 1ms. */
 		system_tick();
 		s_buffer_tick();
-		tasks_tick();
 		interface_tick();
 #if INIT_SYS_STAT_LED
 		s_statLed_tick();
@@ -30,8 +29,6 @@ void sys_systemClock(void){
 #if INIT_SYS_HAS_BATTERY
 		s_battery_tick();
 #endif /* INIT_SYS_HAS_BATTERY */
-
-
 	}
 }
 /* This is the timer callback. Feel free to use a different timer.

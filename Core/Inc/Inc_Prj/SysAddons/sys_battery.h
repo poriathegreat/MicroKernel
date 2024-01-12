@@ -65,7 +65,7 @@ extern s_batteryStructure s_batteryData;
 void s_battery_init();
 
 /* This function is automatically added to the sys() function. Nothing more to do here.*/
-void s_checkbattery_main(void);
+void s_battery_main(void);
 
 /* This function will handle the non blocking timing.
  * It will be added to the system automatically, nothing more to it. */

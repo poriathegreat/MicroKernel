@@ -21,8 +21,8 @@
 #define BUFFER_DATA_ENABLED					INIT_SYS_BUFFER
 #define CHECK_BUFFER_INTERVAL_MS			500		/* Milliseconds */
 #define CHECK_BUFFER_WAIT_TIME				240000 	/* Milliseconds*/
-#define BUFFER_CELLS_IN_RAM_IF_NO_FLASH		15
 #define BUFFER_USE_EXTERNAL_FLASH			1
+#define BUFFER_CELLS_IN_RAM_IF_NO_FLASH		15
 #define BUFFER_USE_ENCRYPTION				INIT_SYS_USE_ENCYPTION	// controlled by the system_setup.h file
 /************************************************************************************/
 /*                               Exported Variables                                 */

@@ -25,33 +25,5 @@
 #if INIT_SYS_STAT_LED
 #include "sys_statusled.h"
 #endif
-#include "sys_loadserialnumber.h"
-
-#include "sys_buffer.h"
-
-
-
-typedef struct{
-
-}s_addonsStructure;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #endif /* INC_INC_PRJ_SYSADDONS_SYS_ADDONS_H_ */

@@ -21,7 +21,7 @@
  *
  * The rest of the system could use this macro as a preprocessor to keep the
  * debug lines from being compiled. */
-#define DEBUGGING			(0)
+#define DEBUGGING			(1)
 /*****************************************************************************/
 /* This is where the debug of each part of the system is controlled.
  * There should be TWO instances of each of these MACROS,

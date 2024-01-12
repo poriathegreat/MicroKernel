@@ -22,11 +22,10 @@
 #include <stdint.h>
 /* Include the main system headers. */
 #include "sys_addons.h"
-
-
-//#include "sys_buffer.h"
-#include "tasks.h"
 #include "sys_debug.h"
+#include "sys_loadserialnumber.h"
+#include "sys_buffer.h"
+
 /************************************************************************************/
 /*                               Exported Variables                                 */
 /************************************************************************************/
@@ -68,14 +67,9 @@ void sys_firstInit(void);
  * This function will keep the system running properly
  * and it will show the device status to the user.
  * Place this function in the super loop. */
-void sys(void);
+void sys_main(void);
 /************************************************************************************/
-/* Add this to the 1ms timer of the system.
- * */
-void sys_systemClock(void);
 
-/* Place copy structure in this function. */
-void sys_fetchData(void);
 
 
 

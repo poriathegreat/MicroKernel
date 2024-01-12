@@ -43,8 +43,8 @@ void s_getBatteryFromAnotherSource(void){
 
 
 	/* Put the values fetched in their corresponding variables. */
-	sysData.sys.batteryPercent = percent;
-	sysData.sys.batteryVoltage = voltage;
+	s_batteryData.percentage = percent;
+	s_batteryData.voltage = voltage;
 }
 #endif /* BATTERY_READ_FROM_ADC */
 uint32_t recheckBattery = RESET;
@@ -53,7 +53,7 @@ void s_battery_tick(void){
 }
 
 
-void s_checkbattery_main(void){
+void s_battery_main(void){
 	if(recheckBattery > RECHECK_BATTERY_INTERVAL){
 		recheckBattery = RESET;
 #if BATTERY_READ_FROM_ADC
@@ -62,8 +62,8 @@ void s_checkbattery_main(void){
 		s_getBatteryFromAnotherSource();
 #endif /* BATTERY_READ_FROM_ADC */
 #if DEBUGGING
-		console_printf(s_batteryConsoleSpace, CONSOLE_PART_TWO, "[%d]", sysData.info.batteryVoltage);
-		console_printf(s_batteryConsoleSpace+1, CONSOLE_PART_TWO, "[%d]", sysData.info.batteryPercent);
+		console_printf(s_batteryConsoleSpace, CONSOLE_PART_TWO, "[%d]", s_batteryData.voltage);
+		console_printf(s_batteryConsoleSpace+1, CONSOLE_PART_TWO, "[%d]", s_batteryData.percentage);
 #endif /* DEBUGGING */
 	}
 }
