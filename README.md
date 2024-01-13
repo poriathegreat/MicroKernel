@@ -341,6 +341,7 @@ super loop.
 
 ## The Interface Layer
 ### The Interface Overview
+The Interface Layer will collect data from different aspects of the system and it will provide access points for the tasks layer to be able to interact with the rest of the system through the Interface Layer.
 ```mermaid
 mindmap
         (The Interface Layer will collect data from every aspect of the system)
@@ -354,6 +355,12 @@ mindmap
             (RS485 BUS)
 ````
 ### The Interface Flow
+The Interface Layer is called by the system.
+Every aspect of the system will be imported into the Interface Layer.
+Raw data is collected in the InterfaceDataStructure.
+This structure will be available to tasks to process further.
+In this layer we will try not to process data and keep the data as RAW as possible, and keep the data processing for the 
+tasks layer.
 ```mermaid
 ---
 title: The Interface Layer
@@ -450,11 +457,102 @@ interface .. interface_main
 interface .. interface_tick
 interface .. interface_init
 interface .. interfaceDataStructure
-
-
 ````
-## The Tasks Layer
 
+### The Interface Structure
+Interfaces are placed in the Core/Src/Src_Prj/Interface/LIB folder.
+Every system aspect will have its own .c/.h file inside its own folder. This will help us organize different interfaces.
+In the INterface folder there will be 3 files: interface_main, interface_init, interface_tick. The corresponding function for each interface must be placed in these functions.
+The dataStructure pointer must be initialized in the interface_init function where the module/sensor is initialized. 
+```mermaid
+---
+title: The Interface Layer
+---
+classDiagram
+class interface_main{
+	sensor1_main();
+	module1_main();
+}
+class interface_init{
+	sensor1_init();
+	interfaceData.sensor1 = &sensor1Data;
+	module1_init();
+	interfaceData.module1 = &module1Data;
+
+}
+class interface_tick{
+	sensor1_tick();
+	module1_tick();
+}
+
+
+class module1_main{
+	module1_function1();
+	module1_function2();
+	module1_function3();
+}
+class module1_init{
+	module1_initFunction1();
+	module1_initfunction2();
+}
+class module1_tick{
+	module1_counter1++;
+	module1_counter2++;
+	module1_counter3++;
+	module1_counter4++;
+}
+
+class sensor1_main{
+	senosr1_function1();
+	sensor1_function2();
+	sensor1_function3();
+}
+class sensor1_init{
+	sensor1_initFunction1();
+	sensor1_initfunction2();
+}
+class sensor1_tick{
+	sensor1_counter1++;
+	sensor1_counter2++;
+	sensor1_counter3++;
+	sensor1_counter4++;
+}
+
+class module1DataStructure{
+	_Bool data1;
+	_Bool switch1;
+	int32 value1;
+}
+class sensor1DataStructure{
+	_Bool data1;
+	_Bool switch1;
+	int32 value1;
+}
+
+
+class interfaceDataStructure{
+	sensor1DataStructure* sensor1;
+	module1DataStructure* module1;
+}
+
+interface_main <|-- sensor1_main
+interface_tick <|-- sensor1_tick
+interface_init <|-- sensor1_init
+interfaceDataStructure <|-- module1DataStructure
+
+interface_main <|-- module1_main
+interface_tick <|-- module1_tick
+interface_init <|-- module1_init
+interfaceDataStructure <|-- sensor1DataStructure
+````
+
+
+
+## The Tasks Layer
+### The Tasks Overview
+The Tasks layer is responsible for processing data collected by the Interface layer.
+The Interface Layer will also provide access points for the Tasks Layer to Interact with different
+aspects of the system.
 ```mermaid
 mindmap
         (The Tasks Layer will process data collected from different aspects of the system)
@@ -469,6 +567,9 @@ mindmap
 ````
 
 ### The Tasks Flow
+The Tasks Layer will have access to the System and to every Interface imported.
+This data is available for different tasks to use.
+The System will call the tasks layer as shown below.
 ```mermaid
 ---
 title: The Tasks Layer
@@ -500,12 +601,12 @@ structure interfaceDataStructure[
 }
 
 class tasks{
-    interface_init()
-    interface_main()
-    interface_tick()
+    tasks_init()
+    tasks_main()
+    tasks_tick()
 }
 
-sys --|> tasks : System will call the tasks layer
+sys <|-- tasks : System will call the tasks layer
 interfaceDataStructure --|> tasks : Tasks will have access to the interfaceDataStructure
 
 class tasks_main{
@@ -546,7 +647,74 @@ function will be called every 1ms.
 tasks .. tasks_main
 tasks .. tasks_tick
 tasks .. tasks_init
-tasks .. tasks_init
+
+````
+### The Tasks Structure
+Tasks are placed in the Core/Src/Src_Prj/Tasks/LIB folder.
+Every task will have its own .c/.h file inside its own folder. This will help us organize different tasks.
+In the Tasks folder there will be 3 files: tasks_main, tasks_init, tasks_tick. The corresponding function for each task must be placed in these functions.
+
+```mermaid
+---
+title: The Tasks Layer
+---
+classDiagram
+class tasks_main{
+	task1_main();
+	task2_main();
+}
+class tasks_init{
+	task1_init();
+	task2_init();
+}
+class tasks_tick{
+	task1_tick();
+	task2_tick();
+}
+
+
+class task1_main{
+	task1_function1();
+	task1_function2();
+	task1_function3();
+}
+class task1_init{
+	task1_initFunction1();
+	task1_initfunction2();
+}
+class task1_tick{
+	task1_counter1++;
+	task1_counter2++;
+	task1_counter3++;
+	task1_counter4++;
+}
+
+class task2_main{
+	task2_function1();
+	task2_function2();
+	task2_function3();
+}
+class task2_init{
+	task2_initFunction1();
+	task2_initfunction2();
+}
+class task2_tick{
+	task2_counter1++;
+	task2_counter2++;
+	task2_counter3++;
+	task2_counter4++;
+}
+
+
+tasks_main <|-- task1_main
+tasks_tick <|-- task1_tick
+tasks_init <|-- task1_init
+
+tasks_main <|-- task2_main
+tasks_tick <|-- task2_tick
+tasks_init <|-- task2_init
+
+````
 
 
 
