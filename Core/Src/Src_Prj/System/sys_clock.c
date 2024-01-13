@@ -10,6 +10,7 @@
 /* Include the system functions */
 #include "system_internal.h"
 #include "interface.h"
+#include "tasks.h"
 /* This function allows us to port SYSTICK (or any 1ms timer) to
  * different parts of the system. Unlocking BareMetal multitasking.
  * Add timer functions here: */
@@ -20,6 +21,8 @@ void sys_systemClock(void){
 		system_tick();
 		s_buffer_tick();
 		interface_tick();
+		tasks_tick();
+
 #if INIT_SYS_STAT_LED
 		s_statLed_tick();
 #endif /* INIT_SYS_STAT_LED */

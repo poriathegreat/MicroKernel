@@ -1,7 +1,7 @@
 /*
- * memory_sendData.c
+ * int_firstInit.c
  *
- *  Created on: Jul 13, 2023
+ *  Created on: Dec 31, 2023
  *      Author: PoriaTheGreat
  */
 /************************************************************************************/
@@ -10,23 +10,34 @@
 /* Include the interface functions */
 #include "interface.h"
 
-HAL_StatusTypeDef interface_passDataToNextLayer(uint8_t *data, size_t dataSize){
-	HAL_StatusTypeDef result = HAL_ERROR;
+
+interfaceDataStructure_t interfaceData = {0};
 
 
 
+void interface_init(void){
+	interfaceData.sys = &sysData;
 
 
 
-
-
-
-
-
-
-
-	return result;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -32,10 +32,9 @@ extern interfaceDataStructure_t interfaceData;
 /* This is the entry point function.
  * This function should be placed in the SUPER LOOP.
  * Inside this function should be all the different tasks. */
-void interface_tasks(void);
+void interface_main(void);
 void interface_tick(void);
-void interface_firstInit(void);
-HAL_StatusTypeDef interface_passDataToNextLayer(uint8_t *data, size_t dataSize);
+void interface_init(void);
 
 
 

@@ -61,7 +61,7 @@ extern sysInfoStructure_t sysData;
 /************************************************************************************/
 /* Run this function before the super loop.
  * This function will configure the system to run properly. */
-void sys_firstInit(void);
+void sys_init(void);
 /************************************************************************************/
 /* This function is always being called. It will check different parts of the system.
  * This function will keep the system running properly

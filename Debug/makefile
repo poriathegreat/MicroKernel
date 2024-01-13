@@ -11,12 +11,14 @@ RM := rm -rf
 -include sources.mk
 -include Drivers/STM32F1xx_HAL_Driver/Src/subdir.mk
 -include Core/Startup/subdir.mk
+-include Core/Src/Src_Prj/Tasks/subdir.mk
+-include Core/Src/Src_Prj/System/SysAddons/subdir.mk
 -include Core/Src/Src_Prj/System/Memory/InternalMemory/subdir.mk
 -include Core/Src/Src_Prj/System/Memory/ExternalMemory/subdir.mk
 -include Core/Src/Src_Prj/System/Memory/subdir.mk
 -include Core/Src/Src_Prj/System/Internal/subdir.mk
 -include Core/Src/Src_Prj/System/subdir.mk
--include Core/Src/Src_Prj/SysAddons/subdir.mk
+-include Core/Src/Src_Prj/Publish/subdir.mk
 -include Core/Src/Src_Prj/Interface/subdir.mk
 -include Core/Src/subdir.mk
 -include objects.mk

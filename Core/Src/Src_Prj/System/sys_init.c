@@ -10,6 +10,7 @@
 /* Include the system internal functions */
 #include "system_internal.h"
 #include "interface.h"
+#include "tasks.h"
 /* This function will run once when the system starts */
 void sys_firstInit(void){
 #if INIT_CONFIGURE_PIN_STATE
@@ -60,7 +61,10 @@ void sys_firstInit(void){
 #endif /* INIT_SYS_STAT_LED */
 
 
-	interface_firstInit();
+	interface_init();
+
+	/* At last, we initialize the tasks. */
+	tasks_init();
 }
 
 /************************************************************************************/

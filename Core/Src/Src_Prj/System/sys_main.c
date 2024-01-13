@@ -6,6 +6,7 @@
  */
 #include "system_internal.h"
 #include "interface.h"
+#include "tasks.h"
 /* The watch dog handle. We will refresh the watch dog in the sys() function. */
 extern IWDG_HandleTypeDef hiwdg;
 /************************************************************************************/
@@ -77,6 +78,8 @@ void sys(void){
 
 	/* Shows the system up time on the top status bar */
 	sys_upTime();
+
+	tasks_main();
 }
 
 /* Add this function to a 1ms timer call back to enable timed multitasking */
